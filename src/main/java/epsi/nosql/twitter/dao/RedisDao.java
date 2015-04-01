@@ -1,5 +1,6 @@
 package epsi.nosql.twitter.dao;
 
+import org.apache.log4j.Logger;
 import redis.clients.jedis.Jedis;
 
 import javax.servlet.ServletContextEvent;
@@ -11,14 +12,33 @@ import javax.servlet.ServletContextListener;
 public class RedisDao implements ServletContextListener {
 
     private static Jedis jedis;
+    private static final Logger log = Logger.getLogger(RedisDao.class);
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        jedis = new Jedis("localhost");
+        try {
+            jedis = new Jedis("localhost");
+            log.info("Connected to Redis");
+        } catch (Exception e) {
+            log.error("Failed to connect to Redis");
+        }
+    }
+
+    public void insert(String key, String value) {
+        jedis.set(key, value);
+    }
+
+    public void delete(String key) {
+            jedis.del(key);
+    }
+
+    public String getValue(String key) {
+        return jedis.get(key);
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
-
+        jedis.close();
+        log.info("Connection to Redis closed");
     }
 }
