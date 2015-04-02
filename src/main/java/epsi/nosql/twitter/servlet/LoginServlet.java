@@ -1,5 +1,6 @@
 package epsi.nosql.twitter.servlet;
 
+import epsi.nosql.twitter.dao.RedisDao;
 import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -34,9 +35,9 @@ public class LoginServlet extends HttpServlet {
 		String login = request.getParameter("login");
 		String pwd = request.getParameter("pwd");
 
-//		if (DaoUser.checkCredentials(login, pwd)) {
-//			request.getSession().setAttribute("login", login);
-//		}
+		if (RedisDao.checkCredentials(login, pwd)) {
+			request.getSession().setAttribute("login", login);
+		}
 
 		response.sendRedirect("index.jsp");
 	}

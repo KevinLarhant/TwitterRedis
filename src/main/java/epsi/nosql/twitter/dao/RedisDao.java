@@ -24,6 +24,13 @@ public class RedisDao implements ServletContextListener {
         }
     }
 
+    @Override
+    public void contextDestroyed(ServletContextEvent servletContextEvent) {
+        jedis.close();
+        log.info("Connection to Redis closed");
+    }
+
+
     public void insert(String key, String value) {
         jedis.set(key, value);
     }
@@ -36,9 +43,16 @@ public class RedisDao implements ServletContextListener {
         return jedis.get(key);
     }
 
-    @Override
-    public void contextDestroyed(ServletContextEvent servletContextEvent) {
-        jedis.close();
-        log.info("Connection to Redis closed");
+    /**
+     * TODO :tout est en clair pour l'instant #yolo
+     * @param login
+     * @param pwd
+     * @return
+     */
+    public static boolean checkCredentials(String login, String pwd) {
+        if(jedis.get(login) == pwd) {
+            return true;
+        }
+        return false;
     }
 }
