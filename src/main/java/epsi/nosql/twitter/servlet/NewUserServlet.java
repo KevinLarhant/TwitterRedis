@@ -30,7 +30,7 @@ public class NewUserServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		log.info("processing GET on /newUser");
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/jsp/NewUser.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/jsp/newUser.jsp");
 		requestDispatcher.forward(request, response);
 	}
 

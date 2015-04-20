@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "LoginServlet", urlPatterns = "/login")
+@WebServlet(name = "LoginServlet", urlPatterns = {"/login","/index"})
 public class LoginServlet extends HttpServlet {
 
 	private final static Logger log = Logger.getLogger(LoginServlet.class);
@@ -19,6 +19,7 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		log.info("GET");
 		RequestDispatcher requestDispatcher;
 
 		if (request.getSession().getAttribute("login") != null) {
@@ -32,6 +33,8 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		log.info("POST");
+
 		String login = request.getParameter("login");
 		String pwd = request.getParameter("pwd");
 

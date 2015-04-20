@@ -12,6 +12,20 @@
 
 </head>
     <body>
-        <h2>Hello World!</h2>
+        <h2>Twittor</h2>
+
+        <div id="menu" style="position:fixed;border:1px #FFFFFF solid;">Menu</div>
+
+        <%--contenu--%>
+        <div class="container">
+        <div id="postTweet">
+            <form action="./tweeting" class="form" role="form" method="post">
+                <textarea placeholder="Tweet your thought"></textarea>
+            </form>
+        </div>
+
+        <div id="listTweet">listTweet</div>
+        </div>
+
     </body>
 </html>

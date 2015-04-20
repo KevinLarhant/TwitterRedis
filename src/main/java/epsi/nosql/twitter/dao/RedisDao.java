@@ -5,6 +5,7 @@ import redis.clients.jedis.Jedis;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import java.util.Objects;
 
 /**
  * Created by klarhant on 26/03/2015.
@@ -47,12 +48,17 @@ public class RedisDao implements ServletContextListener {
      * TODO :tout est en clair pour l'instant #yolo
      * @param login
      * @param pwd
-     * @return
+     * @return si les credentials sont vérifiés/présent en base ou pas
      */
     public static boolean checkCredentials(String login, String pwd) {
-        if(jedis.get(login) == pwd) {
-            return true;
+        String loginValue = jedis.get(login);
+
+        if(loginValue == null){
+            log.info(login + " n'existe pas en base");
+            return false;
         }
-        return false;
+        else {
+            return loginValue.equals(pwd);
+        }
     }
 }
