@@ -1,5 +1,6 @@
 package epsi.nosql.twitter.filter;
 
+import epsi.nosql.twitter.utils.Constantes;
 import org.apache.log4j.Logger;
 
 import javax.servlet.*;
@@ -17,7 +18,7 @@ public class LoginFilter implements Filter {
     }
 
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
-        log.info("Filtre : uri demandÃ© :"+  ((HttpServletRequest)req).getRequestURI());
+        log.info("Filtre : uri demandé :"+  ((HttpServletRequest)req).getRequestURI());
         HttpServletRequest httpReq = (HttpServletRequest) req;
         HttpSession session = httpReq.getSession();
 
