@@ -1,5 +1,7 @@
 package epsi.nosql.twitter.servlet;
 
+import epsi.nosql.twitter.dao.UserDao;
+import epsi.nosql.twitter.utils.Constantes;
 import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -18,34 +20,21 @@ public class NewUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private static final Logger log = Logger.getLogger(NewUserServlet.class);   
 	
-    /**
-     * @see javax.servlet.http.HttpServlet#HttpServlet()
-     */
-    public NewUserServlet() {
-        super();
-    }
-
-	/**
-	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		log.info("processing GET on /newUser");
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/jsp/newUser.jsp");
 		requestDispatcher.forward(request, response);
 	}
 
-	/**
-	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		log.info("processing POST on /newUser");
 		
-		String login = request.getParameter("login");
+		String login = request.getParameter(Constantes.LOGIN);
 		String pwd = request.getParameter("pwd1");
 		
-//		DaoUser.newUser(login, pwd);
+		UserDao.newUser(login, pwd);
 		log.info("User "+login+" créé");
 		
-		response.sendRedirect("login");
+		response.sendRedirect(Constantes.LOGIN);
 	}
 }

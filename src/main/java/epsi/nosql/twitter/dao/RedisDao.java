@@ -32,33 +32,19 @@ public class RedisDao implements ServletContextListener {
     }
 
 
-    public void insert(String key, String value) {
+    public static void insert(String key, String value) {
         jedis.set(key, value);
     }
 
-    public void delete(String key) {
+    public static void delete(String key) {
             jedis.del(key);
     }
 
-    public String getValue(String key) {
+    public static String getValue(String key) {
         return jedis.get(key);
     }
 
-    /**
-     * TODO :tout est en clair pour l'instant #yolo
-     * @param login
-     * @param pwd
-     * @return si les credentials sont vérifiés/présent en base ou pas
-     */
-    public static boolean checkCredentials(String login, String pwd) {
-        String loginValue = jedis.get(login);
-
-        if(loginValue == null){
-            log.info(login + " n'existe pas en base");
-            return false;
-        }
-        else {
-            return loginValue.equals(pwd);
-        }
+    public static Jedis getJedis() {
+        return jedis;
     }
 }

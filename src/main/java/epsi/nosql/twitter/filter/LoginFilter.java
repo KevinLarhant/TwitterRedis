@@ -21,7 +21,7 @@ public class LoginFilter implements Filter {
         HttpServletRequest httpReq = (HttpServletRequest) req;
         HttpSession session = httpReq.getSession();
 
-        Object login = session.getAttribute("login");
+        Object login = session.getAttribute(Constantes.LOGIN);
 
         if (login == null) {
             req.getRequestDispatcher("/login").forward(req, resp);

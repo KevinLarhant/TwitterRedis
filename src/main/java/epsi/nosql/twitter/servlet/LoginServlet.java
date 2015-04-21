@@ -1,6 +1,7 @@
 package epsi.nosql.twitter.servlet;
 
-import epsi.nosql.twitter.dao.RedisDao;
+import epsi.nosql.twitter.dao.UserDao;
+import epsi.nosql.twitter.utils.Constantes;
 import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -22,7 +23,7 @@ public class LoginServlet extends HttpServlet {
 		log.info("GET");
 		RequestDispatcher requestDispatcher;
 
-		if (request.getSession().getAttribute("login") != null) {
+		if (request.getSession().getAttribute(Constantes.LOGIN) != null) {
 			response.sendRedirect("index.jsp");
 		} else {
 			requestDispatcher = request.getRequestDispatcher("/login.jsp");
@@ -35,11 +36,12 @@ public class LoginServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		log.info("POST");
 
-		String login = request.getParameter("login");
+		String login = request.getParameter(Constantes.LOGIN);
 		String pwd = request.getParameter("pwd");
 
-		if (RedisDao.checkCredentials(login, pwd)) {
-			request.getSession().setAttribute("login", login);
+		if (UserDao.checkCredentials(login, pwd) != null) {
+			request.getSession().setAttribute(Constantes.LOGIN, login);
+			request.getSession().setAttribute("idUser", UserDao.checkCredentials(login, pwd));
 		}
 
 		response.sendRedirect("index.jsp");
