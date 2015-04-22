@@ -5,7 +5,6 @@ import redis.clients.jedis.Jedis;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import java.util.Objects;
 
 /**
  * Created by klarhant on 26/03/2015.
@@ -20,6 +19,11 @@ public class RedisDao implements ServletContextListener {
         try {
             jedis = new Jedis("localhost");
             log.info("Connected to Redis");
+
+            if(UserDao.checkCredentials("admin", "admin") == null) {
+                log.info("creation admin");
+                UserDao.newUser("admin", "admin");
+            }
         } catch (Exception e) {
             log.error("Failed to connect to Redis");
         }
@@ -31,18 +35,6 @@ public class RedisDao implements ServletContextListener {
         log.info("Connection to Redis closed");
     }
 
-
-    public static void insert(String key, String value) {
-        jedis.set(key, value);
-    }
-
-    public static void delete(String key) {
-            jedis.del(key);
-    }
-
-    public static String getValue(String key) {
-        return jedis.get(key);
-    }
 
     public static Jedis getJedis() {
         return jedis;

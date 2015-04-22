@@ -42,8 +42,10 @@ public class LoginServlet extends HttpServlet {
 		if (UserDao.checkCredentials(login, pwd) != null) {
 			request.getSession().setAttribute(Constantes.LOGIN, login);
 			request.getSession().setAttribute("idUser", UserDao.checkCredentials(login, pwd));
+
+			log.info(login + " se connecte");
 		}
 
-		response.sendRedirect("index.jsp");
+		response.sendRedirect("index");
 	}
 }

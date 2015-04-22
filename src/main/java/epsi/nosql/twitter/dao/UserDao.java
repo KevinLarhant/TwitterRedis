@@ -52,4 +52,22 @@ public class UserDao {
 
         return null;
     }
+
+    /**
+     * Le premier user va follow le second
+     * @param loginUser
+     * @param loginFollowed
+     * @return
+     */
+    public static void gonnaFollow(String loginUser, String loginFollowed) {
+        Jedis jedis = RedisDao.getJedis();
+
+        String keyUser1 = Constantes.USER_KEY_FIELD + loginUser + Constantes.FOLLOWING_KEY_FIELD;
+        String keyUserFollowed = Constantes.USER_KEY_FIELD + loginFollowed + Constantes.FOLLOWING_KEY_FIELD;
+
+        log.info(loginUser + " follow maintenant : " + loginFollowed);
+
+        jedis.rpush(keyUser1, loginFollowed);
+        jedis.rpush(keyUserFollowed, keyUser1);
+    }
 }

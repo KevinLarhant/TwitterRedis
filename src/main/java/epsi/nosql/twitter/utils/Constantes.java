@@ -10,6 +10,7 @@ public class  Constantes {
     public final static String PASSWORD = "password";
     public final static String CREDENTIALS_KEY_FIELD = ":credentials";
     public final static String FOLLOWING_KEY_FIELD = ":following";
+    public final static String TWEETS_KEY_FIELD = ":tweets";
 
     public final static String LOGIN = "login";
 }

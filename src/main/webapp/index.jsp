@@ -1,31 +1,40 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!doctype html>
 
 <html>
 <head>
     <title>Twitter Redis</title>
     <!-- Includes des js -->
-    <%@include file="WEB-INF/includes/incluJs.jspf"%>
+    <%@include file="WEB-INF/includes/incluJs.jspf" %>
 
     <!-- Includes des fichiers CSS -->
-    <%@include file="WEB-INF/includes/incluStyles.jspf"%>
+    <%@include file="WEB-INF/includes/incluStyles.jspf" %>
 
 </head>
-    <body>
-        <h2>Twittor</h2>
+<body onload="populateListTweet()">
+<div class="page-header">
+    <h2>Twittor</h2>
+</div>
 
-        <div id="menu" style="position:fixed;border:1px #FFFFFF solid;">Menu</div>
+<div id="menu" style="position:fixed;border:1px #FFFFFF solid;">Menu</div>
 
-        <%--contenu--%>
-        <div class="container">
-        <div id="postTweet">
-            <form action="./tweeting" class="form" role="form" method="post">
-                <textarea placeholder="Tweet your thought"></textarea>
-            </form>
+<%--contenu--%>
+<div class="container">
+    <div id="postTweet">
+        <form action="./tweeting" class="form" role="form" method="POST">
+            <textarea id="tweetMsg" class="col-xs-12" placeholder="Tweet your thought" name="tweetMsg"></textarea>
+            <input type="submit" class="btn btn-info pull-right" value="Poster">
+        </form>
+    </div>
+
+    <br />
+
+    <div id="listTweet" class="container-fluid">
+        <div class="progress">
+            Pas de tweet à afficher
         </div>
+    </div>
+</div>
 
-        <div id="listTweet">listTweet</div>
-        </div>
-
-    </body>
+</body>
 </html>

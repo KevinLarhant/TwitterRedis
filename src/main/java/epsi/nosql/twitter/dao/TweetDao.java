@@ -13,15 +13,20 @@ public class TweetDao {
     public static void newTweet(String login, String tweetMsg) {
         Jedis jedis = RedisDao.getJedis();
 
-        jedis.rpush(Constantes.USER_KEY_FIELD + login + Constantes.CREDENTIALS_KEY_FIELD, tweetMsg);
+        jedis.lpush(Constantes.USER_KEY_FIELD + login + Constantes.TWEETS_KEY_FIELD, tweetMsg);
 
         log.info("Ajout du tweet : '"+tweetMsg+"' pour le user "+ login);
     }
 
+    /**
+     * Recupere tous les tweets d'un utilisateur
+     * @param login
+     * @return
+     */
     public static List<String> getAllTweets(String login) {
         Jedis jedis = RedisDao.getJedis();
 
-        String key = Constantes.USER_KEY_FIELD + login + Constantes.CREDENTIALS_KEY_FIELD;
+        String key = Constantes.USER_KEY_FIELD + login + Constantes.TWEETS_KEY_FIELD;
 
         log.info("Demande de tous les tweets de "+ login);
 
