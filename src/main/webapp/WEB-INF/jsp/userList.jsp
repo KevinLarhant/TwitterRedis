@@ -16,7 +16,7 @@
     <div class="page-header">
         <h2>Twittor</h2>
 
-        <div class="pull-right menuHeader">
+        <div class="pull-right menuHeader" style="top:25px;">
             <div class="glyphicon glyphicon-user"><%=session.getAttribute("login")%>
             <a class="glyphicon glyphicon-off" href="logout"><span class="logout">Déconnexion</span></a>
             </div>
@@ -30,7 +30,7 @@
     Pas d'utilisateurs à afficher
 </div>
 
-<div class="botUserList">
+<div class="col-xs-12 botUserList">
     <div id="notif"></div>
 
     <div><a href="index">Retour maison</a></div>

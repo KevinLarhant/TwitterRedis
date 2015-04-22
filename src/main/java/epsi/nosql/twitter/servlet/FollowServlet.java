@@ -25,7 +25,7 @@ public class FollowServlet extends HttpServlet {
         String loginUser = (String) request.getSession().getAttribute(Constantes.LOGIN);
 
         FollowDao.addFollow(loginUser,userToFollow);
-        FollowDao.addFollower(userToFollow,loginUser);
+        FollowDao.addFollower(loginUser,userToFollow);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,6 +44,8 @@ public class FollowServlet extends HttpServlet {
         } else {
             listRes = FollowDao.getFollowing(loginUser);
         }
+
+        log.info(query +" : "+ listRes);
 
         response.getWriter().print(listRes);
     }
