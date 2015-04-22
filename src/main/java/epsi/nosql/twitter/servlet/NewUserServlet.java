@@ -31,10 +31,12 @@ public class NewUserServlet extends HttpServlet {
 		
 		String login = request.getParameter(Constantes.LOGIN);
 		String pwd = request.getParameter("pwd1");
-		
-		UserDao.newUser(login, pwd);
-		log.info("User "+login+" créé");
-		
+
+		if(!UserDao.checkExists(login)) {
+			UserDao.newUser(login, pwd);
+			log.info("User "+login+" créé");
+		}
+
 		response.sendRedirect(Constantes.LOGIN);
 	}
 }

@@ -20,7 +20,7 @@ public class RedisDao implements ServletContextListener {
             jedis = new Jedis("localhost");
             log.info("Connected to Redis");
 
-            if(UserDao.checkCredentials("admin", "admin") == null) {
+            if(!UserDao.checkExists("admin")) {
                 log.info("creation admin");
                 UserDao.newUser("admin", "admin");
             }

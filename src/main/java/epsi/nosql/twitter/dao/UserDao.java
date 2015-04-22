@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import redis.clients.jedis.Jedis;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -26,13 +27,13 @@ public class UserDao {
 
         Jedis jed = RedisDao.getJedis();
         jed.hmset(Constantes.USER_KEY_FIELD + login + Constantes.CREDENTIALS_KEY_FIELD, mapUserCredentials);
+        jed.rpush(Constantes.USERS_KEY_FIELD, login);
 
         log.info("création user " + login + ", avec id : "+ idUser);
     }
 
 
     /**
-     * TODO :tout est en clair pour l'instant #yolo
      * @param login
      * @param pwd
      * @return l'id du user s'il existe, null sinon
@@ -69,5 +70,34 @@ public class UserDao {
 
         jedis.rpush(keyUser1, loginFollowed);
         jedis.rpush(keyUserFollowed, keyUser1);
+    }
+
+    /**
+     * retourne la liste de tous les utilisateurs de l'application
+     * @return
+     */
+    public static List<String> getAllUsers() {
+        Jedis jedis = RedisDao.getJedis();
+
+        log.info("Recherche de tous les users");
+
+        return jedis.lrange(Constantes.USERS_KEY_FIELD,0, jedis.llen(Constantes.USERS_KEY_FIELD));
+    }
+
+    /**
+     * Vérifie si un utilisateur ayant ce login existe déja
+     * @param login
+     * @return
+     */
+    public static boolean checkExists(String login) {
+        List<String> listUser = UserDao.getAllUsers();
+
+        for(String user : listUser) {
+            if(login.equals(user)){
+                return true;
+            }
+        }
+
+        return false;
     }
 }

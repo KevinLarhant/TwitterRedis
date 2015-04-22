@@ -28,7 +28,7 @@
             <button type="submit" class="btn btn-primary">Submit</button>
             </fieldset>
             
-            <a href="./newUser">Nouvel utilisateur?</a>
+            <a class="pull-right" href="./newUser">Nouvel utilisateur?</a>
         </form>
 
     </div>

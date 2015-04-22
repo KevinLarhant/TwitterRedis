@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(filterName = "LoginFilter", urlPatterns={"/index"})
+@WebFilter(filterName = "LoginFilter", urlPatterns={"/index","/index.jsp"})
 public class LoginFilter implements Filter {
 
     Logger log = Logger.getLogger(LoginFilter.class);
@@ -18,7 +18,7 @@ public class LoginFilter implements Filter {
     }
 
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
-        log.info("Filtre : uri demandé :"+  ((HttpServletRequest)req).getRequestURI());
+        log.info("Filtre : uri demandï¿½ :"+  ((HttpServletRequest)req).getRequestURI());
         HttpServletRequest httpReq = (HttpServletRequest) req;
         HttpSession session = httpReq.getSession();
 
