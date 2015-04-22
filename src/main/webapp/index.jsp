@@ -13,7 +13,7 @@
 </head>
 <body onload="populateListTweet(), getStats()">
 
-<div id="customHeader">
+<div class="customHeader">
     <div class="page-header">
         <h2>Twittor</h2>
 

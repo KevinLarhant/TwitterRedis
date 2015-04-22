@@ -13,8 +13,14 @@ public class TweetDao {
     public static void newTweet(String login, String tweetMsg) {
         Jedis jedis = RedisDao.getJedis();
 
-        jedis.lpush(Constantes.USER_KEY_FIELD + login + Constantes.TWEETS_KEY_FIELD, tweetMsg);
-        jedis.lpush(Constantes.USER_KEY_FIELD + login + Constantes.TWEETS_TODISPLAY_KEY_FIELD, tweetMsg);
+        String defTweet = login + " a tweeté : <br>" + tweetMsg;
+
+        jedis.lpush(Constantes.USER_KEY_FIELD + login + Constantes.TWEETS_KEY_FIELD, defTweet);
+        jedis.lpush(Constantes.USER_KEY_FIELD + login + Constantes.TWEETS_TODISPLAY_KEY_FIELD, defTweet);
+
+        for(String lFol : FollowDao.getFollower(login)) {
+            jedis.lpush(Constantes.USER_KEY_FIELD + lFol + Constantes.TWEETS_TODISPLAY_KEY_FIELD,defTweet);
+        }
 
         log.info("Ajout du tweet : '"+tweetMsg+"' pour le user "+ login);
     }
@@ -46,7 +52,7 @@ public class TweetDao {
 
         log.info("Demande de tous les tweets à afficher de "+ login);
 
-        return jedis.lrange(key ,0, jedis.llen(key));
+        return jedis.lrange(key, 0, jedis.llen(key));
     }
 
     /**

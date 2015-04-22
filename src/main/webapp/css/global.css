@@ -80,6 +80,12 @@ h2 {
     margin-bottom : 2px;
 }
 
-#customHeader {
+.customHeader {
+    background-color: lightblue;
+}
+
+.botUserList {
+    position:absolute;
+    bottom:0;
     background-color: lightblue;
 }
