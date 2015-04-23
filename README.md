@@ -1,3 +1,3 @@
 # TwitterRedis
 
-Twitter-like project using th db Redis.
+Twitter-like project using the db Redis.
