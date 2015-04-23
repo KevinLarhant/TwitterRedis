@@ -34,6 +34,7 @@ public class UserDao {
 
 
     /**
+     * Check if the credentials given by 'login' are correct
      * @param login
      * @param pwd
      * @return l'id du user s'il existe, null sinon
@@ -55,7 +56,7 @@ public class UserDao {
     }
 
     /**
-     * Le premier user va follow le second
+     * The first user gonna follow the second
      * @param loginUser
      * @param loginFollowed
      * @return
@@ -73,7 +74,7 @@ public class UserDao {
     }
 
     /**
-     * retourne la liste de tous les utilisateurs de l'application
+     * Return the list of all users of the app
      * @return
      */
     public static List<String> getAllUsers() {
@@ -85,7 +86,7 @@ public class UserDao {
     }
 
     /**
-     * Vérifie si un utilisateur ayant ce login existe déja
+     * Verify if a user with this login already exists
      * @param login
      * @return
      */

@@ -26,7 +26,7 @@ public class TweetDao {
     }
 
     /**
-     * Recupere tous les tweets d'un utilisateur
+     * Get all the tweets of a user
      * @param login
      * @return
      */
@@ -41,7 +41,7 @@ public class TweetDao {
     }
 
     /**
-     * Recupere tous les tweets à afficher d'un user
+     * Get all the tweet to display of a user
      * @param login
      * @return
      */
@@ -56,7 +56,7 @@ public class TweetDao {
     }
 
     /**
-     * Recherche un motif dans la liste des tweets affichés
+     * Search a pattern in the lists of displayed tweets
      * @param loginUser
      * @param regex
      * @return
